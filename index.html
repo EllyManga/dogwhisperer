@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dog Whisperer | Behavior & Training Expert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --charcoal: #1a1a1a;
+    --dark: #222;
+    --brown: #3d2b1f;
+    --amber: #c8882a;
+    --gold: #e8a830;
+    --gold-light: #f0c060;
+    --cream: #f5f0e8;
+    --white: #ffffff;
+    --gray: #888;
+    --light-gray: #f2f2f2;
+    --border: rgba(200,136,42,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--amber);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.18s ease;
+    opacity: 0.6;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* ---- NAVIGATION ---- */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 22px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(10px);
+    padding: 14px 60px;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.4);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--amber);
+    color: var(--white) !important;
+    padding: 8px 22px;
+    border: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 26px; height: 2px; background: var(--white); transition: all 0.3s; }
+
+  /* ---- HERO ---- */
+  #home {
+    height: 100vh; min-height: 700px;
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1800&q=85');
+    background-size: cover;
+    background-position: center 30%;
+    transform: scale(1.08);
+    animation: heroZoom 12s ease forwards;
+  }
+  @keyframes heroZoom { to { transform: scale(1); } }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,10,10,0.82) 0%, rgba(61,43,31,0.65) 60%, rgba(10,10,10,0.5) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 60px;
+    max-width: 760px;
+    animation: fadeUp 1.2s ease 0.3s both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .hero-h1 em { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.8;
+    margin-bottom: 44px;
+    font-weight: 300;
+    max-width: 500px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 14px 36px;
+    background: var(--amber);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+  .btn-outline {
+    padding: 14px 36px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+    z-index: 2;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, rgba(200,136,42,0.8), transparent);
+  }
+
+  /* ---- INTRO STORY ---- */
+  #story {
+    background: var(--black);
+    padding: 100px 60px;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  #story::before {
+    content: '"';
+    position: absolute; top: -20px; left: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 25rem;
+    color: rgba(200,136,42,0.04);
+    line-height: 1; pointer-events: none;
+    font-weight: 900;
+  }
+  .story-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+    align-items: center;
+  }
+  .story-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+  .story-side-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .story-side-title span { color: var(--gold); }
+  .story-divider {
+    width: 40px; height: 2px;
+    background: var(--amber);
+    margin-top: 24px;
+  }
+  .story-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--white);
+    line-height: 1.55;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 28px;
+  }
+  .story-quote strong { color: var(--gold); font-style: normal; font-weight: 700; }
+  .story-body {
+    color: rgba(255,255,255,0.6);
+    line-height: 1.9;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  /* ---- STATS BAR ---- */
+  .stats-bar {
+    background: var(--amber);
+    padding: 40px 60px;
+    display: flex; justify-content: center;
+  }
+  .stats-inner {
+    max-width: 900px; width: 100%;
+    display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    margin-top: 6px;
+  }
+
+  /* ---- SERVICES PREVIEW ---- */
+  #services-preview {
+    padding: 100px 60px;
+    background: var(--cream);
+  }
+  .section-header { text-align: center; margin-bottom: 64px; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .section-label::before, .section-label::after {
+    content: ''; display: block;
+    width: 30px; height: 1px; background: var(--amber);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1.15;
+  }
+  .section-title span { color: var(--amber); font-style: italic; }
+  .services-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;
+  }
+  .service-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--amber);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .svc-icon {
+    width: 52px; height: 52px;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    color: var(--gold);
+    font-size: 1.2rem;
+    transition: background 0.3s;
+  }
+  .service-card:hover .svc-icon { background: var(--amber); }
+  .svc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12px;
+  }
+  .svc-desc {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ---- PHILOSOPHY ---- */
+  #philosophy {
+    background: var(--charcoal);
+    padding: 100px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #philosophy::after {
+    content: 'TRUST';
+    position: absolute; right: -40px; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 10rem;
+    color: rgba(255,255,255,0.02);
+    letter-spacing: 0.1em;
+    font-weight: 900;
+    pointer-events: none;
+  }
+  .philosophy-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px;
+    align-items: center;
+  }
+  .phil-img-wrap {
+    position: relative;
+  }
+  .phil-img {
+    width: 100%; aspect-ratio: 4/5;
+    object-fit: cover;
+    filter: grayscale(20%);
+  }
+  .phil-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--amber);
+    padding: 24px;
+    width: 130px; height: 130px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .phil-badge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--white); line-height: 1;
+  }
+  .phil-badge-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-top: 4px;
+  }
+  .phil-content .section-label { justify-content: flex-start; }
+  .phil-content .section-label::before { display: none; }
+  .phil-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .phil-title span { color: var(--gold); font-style: italic; }
+  .phil-lead {
+    color: rgba(255,255,255,0.65);
+    font-size: 1rem;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+  .phil-pillars { display: flex; flex-direction: column; gap: 20px; }
+  .pillar {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 20px;
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid var(--amber);
+    transition: background 0.3s;
+  }
+  .pillar:hover { background: rgba(255,255,255,0.07); }
+  .pillar-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: var(--amber);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); font-size: 0.9rem;
+  }
+  .pillar-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--white); margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .pillar-desc { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ---- RESULTS / TRANSFORMATION ---- */
+  #results {
+    padding: 100px 60px;
+    background: var(--white);
+  }
+  .results-inner { max-width: 1100px; margin: 0 auto; }
+  .results-grid {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px;
+    align-items: center; margin-top: 60px;
+  }
+  .results-img-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  .results-img-grid img {
+    width: 100%; aspect-ratio: 1;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .results-img-grid img:hover { transform: scale(1.04); }
+  .results-img-grid img:first-child {
+    grid-column: span 2; aspect-ratio: 16/7;
+  }
+  .result-item {
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .result-item:last-child { border-bottom: none; }
+  .result-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--black); margin-bottom: 6px;
+  }
+  .result-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.7; font-weight: 300; }
+  .result-tag {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-top: 10px;
+  }
+
+  /* ---- TESTIMONIALS ---- */
+  #testimonials {
+    background: var(--black);
+    padding: 100px 60px;
+  }
+  .testimonials-inner { max-width: 1100px; margin: 0 auto; }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 64px;
+  }
+  .testi-card {
+    padding: 40px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,136,42,0.15);
+    transition: all 0.3s;
+    position: relative;
+  }
+  .testi-card:hover {
+    background: rgba(200,136,42,0.07);
+    border-color: var(--amber);
+    transform: translateY(-4px);
+  }
+  .testi-quote-icon {
+    color: var(--amber); font-size: 1.5rem; margin-bottom: 20px; opacity: 0.7;
+  }
+  .testi-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  .testi-author {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--amber);
+  }
+  .testi-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; font-weight: 700;
+    color: var(--white); letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .testi-dog {
+    font-size: 0.8rem; color: var(--amber); margin-top: 2px;
+  }
+  .testi-stars { color: var(--gold); font-size: 0.7rem; margin-bottom: 16px; }
+
+  /* ---- CTA BANNER ---- */
+  #cta-banner {
+    background: var(--amber);
+    padding: 80px 60px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  #cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=1400&q=60') center/cover;
+    opacity: 0.08;
+  }
+  .cta-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .cta-sub {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .btn-white {
+    padding: 14px 40px;
+    background: var(--white);
+    color: var(--amber);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .btn-white:hover { background: var(--black); color: var(--gold); }
+
+  /* ---- ABOUT ---- */
+  #about {
+    padding: 100px 60px;
+    background: var(--cream);
+  }
+  .about-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px;
+    align-items: start;
+  }
+  .about-img-wrap { position: relative; }
+  .about-img {
+    width: 100%; aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+  .about-img-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: var(--black);
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .caption-icon { color: var(--gold); font-size: 1.2rem; }
+  .caption-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+  }
+  .about-content .section-label { justify-content: flex-start; }
+  .about-content .section-label::before { display: none; }
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .about-title em { color: var(--amber); font-style: italic; }
+  .about-body {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .about-values {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin: 32px 0;
+  }
+  .val-item {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--black);
+    font-weight: 600;
+  }
+  .val-item i { color: var(--amber); font-size: 0.9rem; }
+
+  /* ---- SERVICES DETAILED ---- */
+  #services {
+    background: var(--black);
+    padding: 100px 60px;
+  }
+  .services-detail-grid {
+    max-width: 1100px; margin: 64px auto 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+  }
+  .svc-detail-card {
+    background: var(--charcoal);
+    padding: 50px 40px;
+    transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .svc-detail-card:hover { background: rgba(200,136,42,0.1); }
+  .svc-detail-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--amber);
+    transition: height 0.4s ease;
+  }
+  .svc-detail-card:hover::before { height: 100%; }
+  .svc-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: rgba(200,136,42,0.15);
+    line-height: 1; margin-bottom: -10px;
+  }
+  .svc-detail-icon {
+    color: var(--amber); font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+  .svc-detail-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 14px;
+  }
+  .svc-detail-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8; font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .svc-outcomes {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .svc-outcomes li {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .svc-outcomes li::before {
+    content: '';
+    width: 16px; height: 1px;
+    background: var(--amber); flex-shrink: 0;
+  }
+  .svc-cta-wrap { text-align: center; margin-top: 60px; }
+
+  /* ---- BOOKING ---- */
+  #booking {
+    background: var(--cream);
+    padding: 100px 60px;
+  }
+  .booking-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px;
+    align-items: start;
+  }
+  .booking-info .section-label { justify-content: flex-start; }
+  .booking-info .section-label::before { display: none; }
+  .booking-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 900; color: var(--black);
+    line-height: 1.2; margin-bottom: 20px;
+  }
+  .booking-title span { color: var(--amber); font-style: italic; }
+  .booking-note {
+    font-size: 0.9rem;
+    color: #666; line-height: 1.8;
+    font-weight: 300; margin-bottom: 32px;
+  }
+  .booking-contact-item {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 16px;
+  }
+  .bc-icon {
+    width: 42px; height: 42px;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 0.9rem; flex-shrink: 0;
+  }
+  .bc-text { font-size: 0.92rem; color: #444; font-weight: 400; }
+  .booking-form {
+    background: var(--white);
+    padding: 48px 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  }
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--black); margin-bottom: 28px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #e0e0e0;
+    background: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--amber); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .btn-submit {
+    width: 100%;
+    padding: 15px;
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none; cursor: pointer;
+    transition: background 0.3s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-submit:hover { background: var(--amber); }
+
+  /* ---- CONTACT ---- */
+  #contact {
+    background: var(--charcoal);
+    padding: 80px 60px;
+  }
+  .contact-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+  }
+  .contact-col-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .contact-info-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .contact-info-item i { color: var(--amber); font-size: 0.85rem; margin-top: 3px; }
+  .contact-info-item span {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .hours-item {
+    display: flex; justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+  .hours-item .day {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--black);
+    padding: 50px 60px 30px;
+    border-top: 1px solid rgba(200,136,42,0.15);
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 24px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 900;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-links { display: flex; gap: 30px; flex-wrap: wrap; }
+  .footer-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .social-row { display: flex; gap: 14px; }
+  .social-link {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-link:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: rgba(200,136,42,0.1);
+  }
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .footer-copy {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
+  }
+  .footer-credit {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.25);
+    font-weight: 300;
+  }
+  .footer-credit a { color: var(--amber); text-decoration: none; }
+
+  /* ---- SCROLL REVEAL ---- */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left {
+    opacity: 0; transform: translateX(-30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right {
+    opacity: 0; transform: translateX(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* ---- MOBILE NAV ---- */
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 280px;
+    background: var(--black);
+    z-index: 2000;
+    padding: 80px 40px 40px;
+    flex-direction: column; gap: 30px;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    border-left: 1px solid rgba(200,136,42,0.2);
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .menu-close {
+    position: absolute; top: 24px; right: 24px;
+    background: none; border: none;
+    color: var(--white); font-size: 1.2rem;
+    cursor: pointer; padding: 8px;
+  }
+  .menu-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1999;
+  }
+  .menu-overlay.open { display: block; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 1024px) {
+    nav { padding: 18px 30px; }
+    nav.scrolled { padding: 12px 30px; }
+    .hero-content { padding: 0 30px; }
+    #story, #services-preview, #philosophy, #results,
+    #testimonials, #cta-banner, #about, #services,
+    #booking, #contact, footer { padding-left: 30px; padding-right: 30px; }
+    .story-inner { grid-template-columns: 1fr; gap: 40px; }
+    .philosophy-inner { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .about-inner { grid-template-columns: 1fr; }
+    .booking-inner { grid-template-columns: 1fr; }
+    .services-detail-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+    .hero-h1 { font-size: 2.4rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+    .stats-inner { flex-direction: column; align-items: center; }
+    .about-values { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Mobile menu -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="menu-close" onclick="closeMenu()"><i class="fas fa-times"></i></button>
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#booking" onclick="closeMenu()">Book a Session</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Dog <span>Whisperer</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#booking">Contact</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Certified Behavior Expert</div>
+    <h1 class="hero-h1">Understanding Dogs<br><em>Beyond</em> Training</h1>
+    <p class="hero-sub">True transformation begins not with commands, but with connection. We decode behavior, rebuild trust, and create lasting change.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary"><i class="fas fa-paw"></i> Start Training</a>
+      <a href="#booking" class="btn-outline">Book Consultation</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- INTRO STORY -->
+<section id="story">
+  <div class="story-inner">
+    <div class="reveal-left">
+      <div class="story-label">The Philosophy</div>
+      <div class="story-side-title">More than a <span>trainer</span><br>— a translator.</div>
+      <div class="story-divider"></div>
+    </div>
+    <div class="reveal-right">
+      <p class="story-quote">"It's not just about commands.<br><strong>It's about understanding your dog.</strong>"</p>
+      <p class="story-body">Every bark, every flinch, every anxious pace tells a story. Dogs don't misbehave — they communicate. The Dog Whisperer method is built on listening before speaking, understanding before correcting, and leading through calm confidence rather than control. This is where transformation begins.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="850">0</div>
+      <div class="stat-label">Dogs Transformed</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="12">0</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="97">0</div>
+      <div class="stat-label">Success Rate %</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="200">0</div>
+      <div class="stat-label">5-Star Reviews</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES PREVIEW -->
+<section id="services-preview">
+  <div class="section-header reveal">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Specialized <span>Training</span> Programs</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="svc-icon"><i class="fas fa-brain"></i></div>
+      <div class="svc-title">Behavioral Training</div>
+      <p class="svc-desc">Deep-rooted behavioral issues addressed at the source — not just suppressed. Real, lasting change for anxious, aggressive, or reactive dogs.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="svc-title">Obedience Training</div>
+      <p class="svc-desc">From basic commands to advanced off-leash reliability. Structure and consistency that dogs respond to naturally.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon"><i class="fas fa-seedling"></i></div>
+      <div class="svc-title">Puppy Programs</div>
+      <p class="svc-desc">Build the right foundation from day one. Socialization, confidence-building, and early habit formation for lifelong balance.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="svc-title">Problem Dog Correction</div>
+      <p class="svc-desc">Specialized intervention for dogs with severe behavioral challenges. Calm, structured rehabilitation without force.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon"><i class="fas fa-user-shield"></i></div>
+      <div class="svc-title">One-on-One Sessions</div>
+      <p class="svc-desc">Private, focused sessions tailored entirely to your dog and your goals. Undivided attention for maximum impact.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING PHILOSOPHY -->
+<section id="philosophy">
+  <div class="philosophy-inner">
+    <div class="phil-img-wrap reveal-left">
+      <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=700&q=85" alt="Dog training philosophy" class="phil-img">
+      <div class="phil-badge">
+        <div class="phil-badge-num">12+</div>
+        <div class="phil-badge-text">Years of Mastery</div>
+      </div>
+    </div>
+    <div class="phil-content reveal-right">
+      <div class="section-label">The Method</div>
+      <h2 class="phil-title">Built on <span>Trust,</span><br>Not Dominance</h2>
+      <p class="phil-lead">The conventional approach relies on repetition and reward. We go deeper — reading the emotional state of every dog, identifying the root cause of behavior, and building a relationship of genuine respect and calm leadership.</p>
+      <div class="phil-pillars">
+        <div class="pillar">
+          <div class="pillar-icon"><i class="fas fa-heartbeat"></i></div>
+          <div>
+            <div class="pillar-title">Trust-Based Methods</div>
+            <p class="pillar-desc">Every session is grounded in earning the dog's trust. No fear, no force — just consistent, calm guidance.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><i class="fas fa-wind"></i></div>
+          <div>
+            <div class="pillar-title">Calm Leadership</div>
+            <p class="pillar-desc">Dogs follow calm, confident energy. We teach owners how to project leadership that dogs naturally respect.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon"><i class="fas fa-eye"></i></div>
+          <div>
+            <div class="pillar-title">Root Cause Diagnosis</div>
+            <p class="pillar-desc">We don't treat symptoms. We identify the behavioral trigger and correct it at its source — permanently.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="results-inner">
+    <div class="section-header reveal">
+      <div class="section-label">Transformations</div>
+      <h2 class="section-title">Real Dogs. <span>Real Results.</span></h2>
+    </div>
+    <div class="results-grid">
+      <div class="results-img-grid reveal-left">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80" alt="Dog training success">
+        <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?w=400&q=80" alt="Focused dog">
+        <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?w=400&q=80" alt="Calm training">
+      </div>
+      <div class="reveal-right">
+        <div class="result-item">
+          <div class="result-name">Aggressive Reactivity — Resolved</div>
+          <p class="result-desc">Max, a 4-year-old German Shepherd, was lunging at strangers and other dogs. After 8 weeks of behavior rehabilitation, he walks calmly off-leash in busy parks.</p>
+          <span class="result-tag">Behavioral Rehab</span>
+        </div>
+        <div class="result-item">
+          <div class="result-name">Severe Separation Anxiety — Overcome</div>
+          <p class="result-desc">Luna destroyed her owner's home when left alone. After targeted conditioning and trust-building sessions, she now settles confidently for hours.</p>
+          <span class="result-tag">Anxiety Treatment</span>
+        </div>
+        <div class="result-item">
+          <div class="result-name">Fearful Rescue — Transformed</div>
+          <p class="result-desc">Shadow arrived deeply traumatized and untouchable. Through patient trust-based work, he now thrives as a confident, affectionate family dog.</p>
+          <span class="result-tag">Rescue Rehab</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-header reveal">
+      <div class="section-label" style="color:var(--amber)">Client Stories</div>
+      <h2 class="section-title" style="color:var(--white)">The Words That <span>Drive Us</span></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testi-quote-icon"><i class="fas fa-quote-left"></i></div>
+        <p class="testi-text">I had tried three other trainers. Nothing worked. Within two sessions, there was a shift I can't fully explain — it was as if my dog finally understood what I was asking. This isn't training. It's transformation.</p>
+        <div class="testi-author">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Client" class="testi-avatar">
+          <div>
+            <div class="testi-name">Sarah M.</div>
+            <div class="testi-dog">Owner of Zeus, Rottweiler</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testi-quote-icon"><i class="fas fa-quote-left"></i></div>
+        <p class="testi-text">Our rescue had been written off by two shelters as unadoptable. Six weeks in, she's sleeping next to my children. I owe this man everything. He saw something in her no one else did.</p>
+        <div class="testi-author">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Client" class="testi-avatar">
+          <div>
+            <div class="testi-name">David K.</div>
+            <div class="testi-dog">Owner of Bella, Mixed Rescue</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testi-quote-icon"><i class="fas fa-quote-left"></i></div>
+        <p class="testi-text">I didn't just learn how to handle my dog — I learned how to communicate with her. That's the difference. I understand why she does what she does now, and it changed everything.</p>
+        <div class="testi-author">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80" alt="Client" class="testi-avatar">
+          <div>
+            <div class="testi-name">Priya N.</div>
+            <div class="testi-dog">Owner of Koda, Siberian Husky</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta-banner">
+  <h2 class="cta-headline reveal">Take Control.<br>Build Trust. Train Smarter.</h2>
+  <p class="cta-sub reveal">The life you imagined with your dog is possible. It starts with a single session.</p>
+  <a href="#booking" class="btn-white reveal">Book Your Session Today</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="reveal-left">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=600&q=85" alt="Dog Whisperer trainer" class="about-img">
+        <div class="about-img-caption">
+          <i class="fas fa-certificate caption-icon"></i>
+          <span class="caption-text">Certified Canine Behavior Consultant · 12 Years Experience</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-content reveal-right">
+      <div class="section-label">The Trainer</div>
+      <h2 class="about-title">Not just a trainer —<br>a <em>student of dogs</em></h2>
+      <p class="about-body">For over a decade, James Walker has dedicated his life to understanding the language dogs speak — the subtle signals, the emotional triggers, the deep-seated patterns that drive behavior. His journey began not in a classroom, but in the field, working alongside rescue organizations and veterinary behaviorists.</p>
+      <p class="about-body">What sets James apart is not certification alone — it's an obsessive dedication to understanding each dog as an individual, and a commitment to empowering owners with knowledge, not just results.</p>
+      <div class="about-values">
+        <div class="val-item"><i class="fas fa-check"></i> Science-Backed Methods</div>
+        <div class="val-item"><i class="fas fa-check"></i> Force-Free Approach</div>
+        <div class="val-item"><i class="fas fa-check"></i> Owner Education First</div>
+        <div class="val-item"><i class="fas fa-check"></i> Ongoing Support</div>
+        <div class="val-item"><i class="fas fa-check"></i> All Breeds & Ages</div>
+        <div class="val-item"><i class="fas fa-check"></i> In-Home Sessions</div>
+      </div>
+      <a href="#booking" class="btn-primary" style="display:inline-flex"><i class="fas fa-calendar-alt"></i> Book With James</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES DETAILED -->
+<section id="services">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-header reveal">
+      <div class="section-label" style="color:var(--amber)">The Full Program</div>
+      <h2 class="section-title" style="color:var(--white)">Every Dog Deserves the <span>Right Training</span></h2>
+    </div>
+  </div>
+  <div class="services-detail-grid">
+    <div class="svc-detail-card reveal">
+      <div class="svc-num">01</div>
+      <div class="svc-detail-icon"><i class="fas fa-brain"></i></div>
+      <div class="svc-detail-title">Behavioral Training</div>
+      <p class="svc-detail-desc">Comprehensive behavioral assessment and modification for dogs displaying aggression, fear, resource guarding, or compulsive behaviors.</p>
+      <ul class="svc-outcomes">
+        <li>Aggression and reactivity management</li>
+        <li>Fear and anxiety reduction</li>
+        <li>Resource guarding resolution</li>
+        <li>Sustainable behavioral change</li>
+      </ul>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-num">02</div>
+      <div class="svc-detail-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="svc-detail-title">Obedience Training</div>
+      <p class="svc-detail-desc">Foundation to advanced obedience for dogs of all ages. Create reliability, responsiveness, and mutual respect between dog and owner.</p>
+      <ul class="svc-outcomes">
+        <li>Reliable on and off-leash control</li>
+        <li>Sit, stay, recall, heel mastery</li>
+        <li>Public manners and social skills</li>
+        <li>Long-term command retention</li>
+      </ul>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-num">03</div>
+      <div class="svc-detail-icon"><i class="fas fa-seedling"></i></div>
+      <div class="svc-detail-title">Puppy Programs</div>
+      <p class="svc-detail-desc">Age-appropriate training from 8 weeks onward. Lay the groundwork for a well-balanced adult dog through socialization and early structure.</p>
+      <ul class="svc-outcomes">
+        <li>Bite inhibition and impulse control</li>
+        <li>Crate and house training</li>
+        <li>Socialization with people and dogs</li>
+        <li>Confidence-building exercises</li>
+      </ul>
+    </div>
+    <div class="svc-detail-card reveal">
+      <div class="svc-num">04</div>
+      <div class="svc-detail-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="svc-detail-title">Correction Training</div>
+      <p class="svc-detail-desc">Specialized rehabilitation for dogs with deep-rooted problem behaviors. Structured, humane intervention with measurable outcomes.</p>
+      <ul class="svc-outcomes">
+        <li>Severe aggression cases</li>
+        <li>Dog-to-dog conflict resolution</li>
+        <li>Compulsive behavior modification</li>
+        <li>Post-trauma recovery plans</li>
+      </ul>
+    </div>
+    <div class="svc-detail-card reveal" style="grid-column:1/-1">
+      <div class="svc-num">05</div>
+      <div class="svc-detail-icon"><i class="fas fa-user-shield"></i></div>
+      <div class="svc-detail-title">Private One-on-One Sessions</div>
+      <p class="svc-detail-desc">Fully personalized, in-home or on-location sessions tailored entirely around your dog's unique needs and your specific lifestyle goals. Maximum focus, maximum results.</p>
+      <ul class="svc-outcomes" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px 30px">
+        <li>Complete privacy and focus</li>
+        <li>Custom training plans</li>
+        <li>In-your-home environment</li>
+        <li>Owner training included</li>
+        <li>Weekly progress tracking</li>
+        <li>Post-program support</li>
+      </ul>
+    </div>
+  </div>
+  <div class="svc-cta-wrap reveal">
+    <a href="#booking" class="btn-primary" style="font-size:0.9rem;padding:16px 50px"><i class="fas fa-calendar-check"></i> Book a Session Today</a>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-inner">
+    <div class="booking-info reveal-left">
+      <div class="section-label">Get Started</div>
+      <h2 class="booking-title">Ready to <span>Transform</span><br>Your Dog?</h2>
+      <p class="booking-note">Fill in the form with details about your dog and the challenges you're facing. We'll review your situation and recommend the best program before your first session.</p>
+      <div class="booking-contact-item">
+        <div class="bc-icon"><i class="fas fa-phone"></i></div>
+        <div class="bc-text">+1 (555) 123-4567</div>
+      </div>
+      <div class="booking-contact-item">
+        <div class="bc-icon"><i class="fas fa-envelope"></i></div>
+        <div class="bc-text">hello@dogwhisperer.com</div>
+      </div>
+      <div class="booking-contact-item">
+        <div class="bc-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="bc-text">Serving the Greater Metro Area<br>In-Home Sessions Available</div>
+      </div>
+      <div class="booking-contact-item">
+        <div class="bc-icon"><i class="fas fa-clock"></i></div>
+        <div class="bc-text">Mon – Sat: 7:00 AM – 7:00 PM<br>Emergency consults available</div>
+      </div>
+    </div>
+    <div class="booking-form reveal-right">
+      <div class="form-title">Book a Consultation</div>
+      <form id="bookingForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+1 555 000 0000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Dog Breed</label>
+            <input type="text" placeholder="e.g. German Shepherd">
+          </div>
+          <div class="form-group">
+            <label>Dog Age</label>
+            <input type="text" placeholder="e.g. 2 years">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Main Behavior Issue</label>
+          <input type="text" placeholder="e.g. Aggression, barking, pulling on leash">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select>
+              <option value="">Select a program</option>
+              <option>Behavioral Training</option>
+              <option>Obedience Training</option>
+              <option>Puppy Program</option>
+              <option>Correction Training</option>
+              <option>Private Sessions</option>
+              <option>Not sure — advise me</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Preferred Date</label>
+            <input type="date">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea placeholder="Tell us more about your dog and what you hope to achieve..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          <i class="fas fa-paw"></i> Submit Booking Request
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="contact-col-title">Get In Touch</div>
+      <div class="contact-info-item">
+        <i class="fas fa-phone"></i>
+        <span>+1 (555) 123-4567</span>
+      </div>
+      <div class="contact-info-item">
+        <i class="fas fa-envelope"></i>
+        <span>hello@dogwhisperer.com</span>
+      </div>
+      <div class="contact-info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Greater Metro Area<br>In-Home Sessions Available</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="contact-col-title">Working Hours</div>
+      <div class="hours-item"><span class="day">Monday – Friday</span><span>7:00 AM – 7:00 PM</span></div>
+      <div class="hours-item"><span class="day">Saturday</span><span>8:00 AM – 5:00 PM</span></div>
+      <div class="hours-item"><span class="day">Sunday</span><span>By Appointment</span></div>
+      <div class="hours-item"><span class="day">Emergencies</span><span>24hr Consult</span></div>
+    </div>
+    <div class="reveal">
+      <div class="contact-col-title">Programs</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <a href="#services" style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Behavioral Training</a>
+        <a href="#services" style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Obedience Training</a>
+        <a href="#services" style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Puppy Programs</a>
+        <a href="#services" style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Correction Training</a>
+        <a href="#services" style="font-size:0.85rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Private Sessions</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="contact-col-title">Follow Us</div>
+      <div class="social-row" style="flex-wrap:wrap">
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+      </div>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.35);margin-top:20px;line-height:1.6;font-weight:300">Follow our journey and see real transformation stories from real dogs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Dog <span>Whisperer</span></div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#booking">Book Now</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="social-row">
+      <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2025 Dog Whisperer. All rights reserved.</div>
+    <div class="footer-credit">Designed with precision by <a href="https://madshaqdigitalpr.com" target="_blank">Madshaq Digital PR</a></div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 60);
+  });
+  document.querySelectorAll('a, button, .service-card, .testi-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1.6)';
+      ring.style.opacity = '1';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.opacity = '0.6';
+    });
+  });
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  function openMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.getElementById('menuOverlay').classList.add('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('menuOverlay').classList.remove('open');
+  }
+
+  // Scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+  // Counter animation
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.floor(current) + (el.dataset.target == '97' ? '%' : '+');
+      if (current >= target) clearInterval(timer);
+    }, 16);
+  }
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+  // Form submit
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.btn-submit');
+    btn.innerHTML = '<i class="fas fa-check"></i> Request Received — We\'ll Be In Touch!';
+    btn.style.background = '#2a7d4f';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paw"></i> Submit Booking Request';
+      btn.style.background = '';
+      this.reset();
+    }, 4000);
+  });
+</script>
+</body>
+</html>
